@@ -862,10 +862,10 @@ export default function Home() {
                       Call or Text
                     </div>
                     <a
-                      href="tel:+16105550142"
+                      href="tel:+14847941508"
                       className="text-white text-sm font-medium hover:text-orange-400 transition-colors"
                     >
-                      (610) 555-0142
+                      (484) 794-1508
                     </a>
                   </div>
                 </div>
