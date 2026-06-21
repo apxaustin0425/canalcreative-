@@ -130,12 +130,12 @@ const PROCESS_STEPS = [
   {
     num: "01",
     title: "Inquire",
-    desc: "Fill out the contact form or email Andres directly. Tell us about your business and what kind of space you need.",
+    desc: "Fill out the contact form or send us an email. Tell us about your business and what kind of space you need.",
   },
   {
     num: "02",
     title: "Vetting & Tour",
-    desc: "Andres personally reviews every inquiry and schedules a walkthrough of available spaces that fit your needs.",
+    desc: "We review every inquiry and schedule a walkthrough of available spaces that fit your needs.",
   },
   {
     num: "03",
@@ -156,7 +156,7 @@ const FAQS = [
   },
   {
     q: "Are leases month-to-month or long-term?",
-    a: "We offer flexible terms. Month-to-month leases are available for most units. Longer-term leases may come with additional benefits — ask Andres during your tour.",
+    a: "We offer flexible terms. Month-to-month leases are available for most units. Longer-term leases may come with additional benefits — ask us during your tour.",
   },
   {
     q: "Is there parking available?",
@@ -172,7 +172,7 @@ const FAQS = [
   },
   {
     q: "Is there an application fee?",
-    a: "There is no online application portal at this time. Reach out to Andres directly and he will guide you through the process.",
+    a: "There is no online application portal at this time. Reach out to us directly and we will guide you through the process.",
   },
 ];
 
@@ -438,9 +438,7 @@ export default function Home() {
             <p>
               From tattoo studios and photography spaces to workshops and
               professional offices, Canal Creative brings together a diverse
-              community of people who take their work seriously. The building is
-              managed by Andres, who personally vets every new tenant to keep the
-              community intentional and collaborative.
+community of people who take their work seriously. Every new tenant is carefully vetted to keep the community intentional and collaborative.
             </p>
           </div>
         </div>
@@ -576,8 +574,7 @@ export default function Home() {
             How It Works
           </h2>
           <p className="text-zinc-400 mb-12 max-w-xl">
-            No complicated portals. No waiting rooms. Andres personally handles
-            every inquiry and makes the process straightforward.
+            No complicated portals. No waiting rooms. We handle every inquiry directly and make the process straightforward.
           </p>
           <div className="grid md:grid-cols-4 gap-6">
             {PROCESS_STEPS.map((step, i) => (
@@ -661,8 +658,7 @@ export default function Home() {
             Your Space
           </h2>
           <p className="text-zinc-400 mb-10 max-w-xl">
-            Tell us a little about you and your business. Andres personally reads
-            every inquiry and will follow up to set up a walkthrough.
+            Tell us a little about you and your business. We read every inquiry and will follow up to set up a walkthrough.
           </p>
 
           <div className="grid lg:grid-cols-2 gap-8 items-start">
@@ -812,7 +808,7 @@ export default function Home() {
                   <Navigation size={14} /> Send Inquiry
                 </button>
                 <span className="text-xs text-zinc-500">
-                  Opens your email app addressed to Andres. No account needed.
+                  Opens your email app. No account needed.
                 </span>
               </div>
             </form>
@@ -820,14 +816,14 @@ export default function Home() {
             {/* Contact info + map */}
             <div className="flex flex-col gap-4">
               <div className="bg-card border border-white/10 rounded-lg overflow-hidden">
-                {/* Email Andres */}
+                {/* Direct Email */}
                 <div className="flex items-center gap-4 px-5 py-4 border-b border-white/10">
                   <div className="w-9 h-9 bg-orange-600/20 rounded-md flex items-center justify-center shrink-0">
                     <Mail size={16} className="text-orange-500" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-display font-bold mb-0.5">
-                      Email Andres
+                      Direct Email
                     </div>
                     <div className="text-white text-sm font-medium flex items-center">
                       andres@canalcreative.net
