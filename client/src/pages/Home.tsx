@@ -5,7 +5,7 @@
  * Layout: Sticky nav, full-bleed hero, scroll sections, mailto contact form
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   MapPin,
   Navigation,
@@ -27,8 +27,27 @@ const NAV_LINKS = [
   { label: "Spaces", href: "#spaces" },
   { label: "Amenities", href: "#amenities" },
   { label: "Process", href: "#process" },
+  { label: "Gallery", href: "#gallery" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
+];
+
+const BANQUET_PHOTOS = [
+  "/manus-storage/banquet_01_2930033a.jpg",
+  "/manus-storage/banquet_02_4fc488a3.jpg",
+  "/manus-storage/banquet_03_4d54ca9e.jpg",
+  "/manus-storage/banquet_04_31188268.jpg",
+  "/manus-storage/banquet_05_1caae0d2.jpg",
+  "/manus-storage/banquet_06_7f57b9a9.jpg",
+  "/manus-storage/banquet_07_b85dd51a.jpg",
+  "/manus-storage/banquet_08_646e4c1c.jpg",
+  "/manus-storage/banquet_09_bc8040ce.jpg",
+  "/manus-storage/banquet_10_addbac18.jpg",
+  "/manus-storage/banquet_11_c1a8d8c0.jpg",
+  "/manus-storage/banquet_12_691d8079.jpg",
+  "/manus-storage/banquet_13_410c43bd.jpg",
+  "/manus-storage/banquet_14_2e9a1ab3.jpg",
+  "/manus-storage/banquet_15_29ec1155.jpg",
 ];
 
 const STATS = [
@@ -55,7 +74,7 @@ const SPACES = [
       "Shared restrooms",
       "Month-to-month available",
     ],
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80",
+    image: "/manus-storage/IMG_0985_e3367369.jpg",
   },
   {
     id: "offices",
@@ -73,7 +92,7 @@ const SPACES = [
       "Mail & package handling",
       "Month-to-month available",
     ],
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
+    image: "/manus-storage/IMG_1141_710febbf.jpg",
   },
   {
     id: "workshops",
@@ -91,7 +110,7 @@ const SPACES = [
       "Heavy-duty power",
       "Loading dock nearby",
     ],
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80",
+    image: "/manus-storage/IMG_0898_4219c22f.jpg",
   },
   {
     id: "event",
@@ -109,7 +128,7 @@ const SPACES = [
       "Day & weekend rental",
       "Tenant priority booking",
     ],
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
+    image: "/manus-storage/banquet_05_1caae0d2.jpg",
   },
 ];
 
@@ -203,7 +222,24 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  const openLightbox = useCallback((i: number) => setLightboxIndex(i), []);
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const prevPhoto = useCallback(() => setLightboxIndex(i => i !== null ? (i - 1 + BANQUET_PHOTOS.length) % BANQUET_PHOTOS.length : null), []);
+  const nextPhoto = useCallback(() => setLightboxIndex(i => i !== null ? (i + 1) % BANQUET_PHOTOS.length : null), []);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") prevPhoto();
+      if (e.key === "ArrowRight") nextPhoto();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [lightboxIndex, closeLightbox, prevPhoto, nextPhoto]);
 
   // Form state
   const [form, setForm] = useState({
@@ -928,6 +964,90 @@ community of people who take their work seriously. Every new tenant is carefully
       </section>
 
       {/* ─── FOOTER ─── */}
+      {/* ─── GALLERY ─── */}
+      <section id="gallery" className="py-20 bg-[oklch(0.11_0.005_60)]">
+        <div className="container">
+          <div className="pill-tag mb-5">Gallery</div>
+          <h2
+            className="font-display font-black uppercase text-white leading-none mb-3"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+          >
+            Event Space
+            <br />
+            <span className="text-orange-500">Banquet Hall</span>
+          </h2>
+          <p className="text-zinc-400 mb-10 max-w-xl">
+            A flexible, industrial-chic venue inside Canal Creative — available for
+            events, pop-ups, markets, shoots, and private gatherings.
+          </p>
+          <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 space-y-3">
+            {BANQUET_PHOTOS.map((src, i) => (
+              <div
+                key={i}
+                className="break-inside-avoid cursor-pointer overflow-hidden rounded-md group relative"
+                onClick={() => openLightbox(i)}
+              >
+                <img
+                  src={src}
+                  alt={`Banquet Hall ${i + 1}`}
+                  className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-xs font-display font-bold uppercase tracking-widest bg-black/60 px-3 py-1 rounded-sm">
+                    View
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <button
+              onClick={() => scrollTo("contact")}
+              className="btn-orange inline-flex items-center gap-2 px-6 py-3 text-sm rounded-sm"
+            >
+              Inquire About Event Space <ArrowRight size={14} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── LIGHTBOX ─── */}
+      {lightboxIndex !== null && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+          onClick={closeLightbox}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/70 hover:text-white text-3xl font-light z-10"
+            onClick={closeLightbox}
+          >
+            <X size={28} />
+          </button>
+          <button
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-10 bg-white/10 hover:bg-white/20 rounded-full p-3 transition-colors"
+            onClick={(e) => { e.stopPropagation(); prevPhoto(); }}
+          >
+            <ChevronDown size={24} className="rotate-90" />
+          </button>
+          <button
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-10 bg-white/10 hover:bg-white/20 rounded-full p-3 transition-colors"
+            onClick={(e) => { e.stopPropagation(); nextPhoto(); }}
+          >
+            <ChevronDown size={24} className="-rotate-90" />
+          </button>
+          <img
+            src={BANQUET_PHOTOS[lightboxIndex]}
+            alt={`Banquet Hall ${lightboxIndex + 1}`}
+            className="max-h-[90vh] max-w-[90vw] object-contain rounded-md shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <div className="absolute bottom-4 text-zinc-400 text-sm font-display">
+            {lightboxIndex + 1} / {BANQUET_PHOTOS.length}
+          </div>
+        </div>
+      )}
+
       <footer className="bg-[oklch(0.10_0.005_60)] border-t border-white/10 py-8">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
