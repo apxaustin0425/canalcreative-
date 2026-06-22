@@ -24,7 +24,6 @@ const HERO_IMAGE = "/manus-storage/canal_creative_hero_2e7c7369.jpg";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
-  { label: "Spaces", href: "#spaces" },
   { label: "Amenities", href: "#amenities" },
   { label: "Process", href: "#process" },
   { label: "Gallery", href: "#gallery" },
@@ -480,96 +479,6 @@ community of people who take their work seriously. Every new tenant is carefully
         </div>
       </section>
 
-      {/* ─── SPACES ─── */}
-      <section id="spaces" className="py-20 bg-[oklch(0.11_0.005_60)]">
-        <div className="container">
-          <div className="pill-tag mb-5">Spaces</div>
-          <h2
-            className="font-display font-black uppercase text-white leading-none mb-3"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
-          >
-            Find Your Space
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-xl">
-            From compact studios to ground-floor workshops, find a space that
-            fits how you work. Availability changes often — reach out to see
-            what's open right now.
-          </p>
-
-          {/* Tab pills */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {SPACES.map((s) => (
-              <button
-                key={s.id}
-                onClick={() => setActiveSpace(s.id)}
-                className={`px-4 py-2 rounded-full text-sm font-display font-bold uppercase tracking-wide transition-all ${
-                  activeSpace === s.id
-                    ? "bg-white text-black"
-                    : "border border-white/20 text-zinc-300 hover:border-white/40"
-                }`}
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Space card */}
-          <div className="bg-card rounded-lg overflow-hidden border border-white/10 flex flex-col md:flex-row">
-            <div className="md:w-5/12 relative">
-              <img
-                src={currentSpace.image}
-                alt={currentSpace.title}
-                className="w-full h-64 md:h-full object-cover"
-              />
-              <span
-                className={`absolute top-4 left-4 ${currentSpace.tagColor} text-white text-xs font-display font-black uppercase tracking-widest px-3 py-1 rounded-sm`}
-              >
-                {currentSpace.tag}
-              </span>
-            </div>
-            <div className="md:w-7/12 p-8 flex flex-col justify-center">
-              <h3 className="font-display font-black text-white text-4xl uppercase mb-4">
-                {currentSpace.title}
-              </h3>
-              <div className="flex flex-col gap-1 mb-4">
-                <div>
-                  <span className="text-zinc-500 text-xs uppercase tracking-widest font-display font-bold">
-                    Best For
-                  </span>
-                  <p className="text-zinc-200 text-sm mt-0.5">
-                    {currentSpace.bestFor}
-                  </p>
-                </div>
-                <div className="mt-2">
-                  <span className="text-zinc-500 text-xs uppercase tracking-widest font-display font-bold">
-                    Typical Size
-                  </span>
-                  <p className="text-zinc-200 text-sm mt-0.5">
-                    {currentSpace.size}
-                  </p>
-                </div>
-              </div>
-              <p className="text-zinc-300 text-sm leading-relaxed mb-6">
-                {currentSpace.description}
-              </p>
-              <div className="grid grid-cols-2 gap-2 mb-6">
-                {currentSpace.features.map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-sm text-zinc-300">
-                    <Check size={14} className="text-orange-500 shrink-0" />
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <button
-                onClick={() => scrollTo("contact")}
-                className="btn-orange inline-flex items-center gap-2 px-5 py-2.5 text-sm rounded-sm self-start"
-              >
-                Inquire about {currentSpace.label.toLowerCase()} <ArrowRight size={14} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ─── AMENITIES ─── */}
       <section id="amenities" className="py-20 bg-background">
