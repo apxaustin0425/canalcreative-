@@ -20,7 +20,7 @@ import {
   X,
 } from "lucide-react";
 
-const HERO_IMAGE = "/manus-storage/canal_creative_hero_2e7c7369.jpg";
+const HERO_IMAGE = "/manus-storage/canal_hero_mural_844c7c39.jpg";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -369,18 +369,23 @@ export default function Home() {
 
       {/* ─── HERO ─── */}
       <section className="relative min-h-screen flex flex-col justify-end pb-0">
-        {/* Background image */}
+        {/* Background image — mural fills the frame, centered */}
         <div className="absolute inset-0">
           <img
             src={HERO_IMAGE}
-            alt="Canal Creative interior — historic industrial building with brick walls and studio spaces"
-            className="w-full h-full object-cover"
+            alt="531 Canal St / Creative Pl street sign mural — the identity of Canal Creative"
+            className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[oklch(0.13_0.005_60)]" />
+          {/* Gradient: transparent at top-center (preserves mural), dark at bottom for text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[oklch(0.10_0.005_60)]" />
+          {/* Side darkening so text on left has contrast */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/20" />
         </div>
 
-        {/* Hero content */}
+        {/* Hero content — left column, mural visible on right */}
         <div className="relative container pb-16 pt-32">
+          <div className="grid md:grid-cols-2 gap-8 items-end">
+          <div>
           {/* Pill */}
           <div className="pill-tag mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-orange-500 inline-block" />
@@ -389,7 +394,7 @@ export default function Home() {
 
           <h1
             className="font-display font-black uppercase text-white leading-none mb-5"
-            style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}
+            style={{ fontSize: "clamp(2rem, 4.5vw, 3.8rem)", textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
           >
             Create, Collaborate
             <br />
@@ -398,7 +403,7 @@ export default function Home() {
             New Studio
           </h1>
 
-          <p className="text-zinc-200 text-base md:text-lg max-w-lg mb-8 leading-relaxed">
+          <p className="text-zinc-200 text-base md:text-lg max-w-lg mb-8 leading-relaxed" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}>
             Canal Creative is a working community of artists, makers, and small
             businesses inside a historic industrial building in Reading, PA. Find
             your space — and the people building alongside you.
@@ -431,6 +436,9 @@ export default function Home() {
               <Navigation size={12} /> Get directions
             </span>
           </a>
+          </div>{/* end left col */}
+          <div className="hidden md:block" />{/* right col — mural shows through */}
+          </div>{/* end grid */}
         </div>
 
         {/* Stats bar */}
