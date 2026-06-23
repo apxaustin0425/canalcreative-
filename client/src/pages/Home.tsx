@@ -6,6 +6,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import {
   MapPin,
   Navigation,
@@ -367,49 +368,36 @@ export default function Home() {
         )}
       </header>
 
-      {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex flex-col justify-end pb-0">
-        {/* Background image — mural fills the frame, centered */}
-        <div className="absolute inset-0">
-          <img
-            src={HERO_IMAGE}
-            alt="531 Canal St / Creative Pl street sign mural — the identity of Canal Creative"
-            className="w-full h-full object-cover object-center"
-          />
-          {/* Gradient: transparent at top-center (preserves mural), dark at bottom for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[oklch(0.10_0.005_60)]" />
-          {/* Side darkening so text on left has contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/20" />
-        </div>
-
-        {/* Hero content — left column, mural visible on right */}
-        <div className="relative container pb-16 pt-32">
-          <div className="grid md:grid-cols-2 gap-8 items-end">
-          <div>
+      {/* ─── HERO (Scroll Expansion) ─── */}
+      <ScrollExpandMedia
+        mediaType="image"
+        mediaSrc={HERO_IMAGE}
+        bgImageSrc={HERO_IMAGE}
+        title="Canal Creative"
+        date="Reading, PA · 531 Canal St"
+        scrollToExpand="Scroll to explore"
+        textBlend
+      >
+        {/* Content revealed after full expansion */}
+        <div className="max-w-4xl mx-auto text-center">
           {/* Pill */}
-          <div className="pill-tag mb-6">
+          <div className="pill-tag mb-6 mx-auto w-fit">
             <span className="w-1.5 h-1.5 rounded-full bg-orange-500 inline-block" />
             Creative Studios · Offices · Workshops
           </div>
-
           <h1
             className="font-display font-black uppercase text-white leading-none mb-5"
-            style={{ fontSize: "clamp(2rem, 4.5vw, 3.8rem)", textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 4rem)", textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
           >
             Create, Collaborate
-            <br />
-            &amp; Grow In Your
-            <br />
-            New Studio
+            <br />&amp; Grow In Your New Studio
           </h1>
-
-          <p className="text-zinc-200 text-base md:text-lg max-w-lg mb-8 leading-relaxed" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}>
+          <p className="text-zinc-300 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
             Canal Creative is a working community of artists, makers, and small
             businesses inside a historic industrial building in Reading, PA. Find
             your space — and the people building alongside you.
           </p>
-
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="flex flex-wrap gap-3 mb-8 justify-center">
             <button
               onClick={() => scrollTo("contact")}
               className="btn-orange flex items-center gap-2 px-6 py-3 text-base rounded-sm"
@@ -423,12 +411,11 @@ export default function Home() {
               Schedule a Tour
             </button>
           </div>
-
           <a
             href="https://maps.google.com/?q=531+Canal+Street+Reading+PA+19602"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 text-sm text-zinc-300 hover:text-white transition-colors border border-white/20 rounded-sm px-4 py-2"
+            className="inline-flex items-center gap-3 text-sm text-zinc-300 hover:text-white transition-colors border border-white/20 rounded-sm px-4 py-2 mx-auto"
           >
             <MapPin size={14} className="text-orange-500" />
             531 Canal Street, Reading, PA 19602
@@ -436,27 +423,17 @@ export default function Home() {
               <Navigation size={12} /> Get directions
             </span>
           </a>
-          </div>{/* end left col */}
-          <div className="hidden md:block" />{/* right col — mural shows through */}
-          </div>{/* end grid */}
-        </div>
-
-        {/* Stats bar */}
-        <div className="relative bg-[oklch(0.10_0.005_60)] border-t border-white/10">
-          <div className="container grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+          {/* Stats bar */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 border border-white/10 rounded-sm">
             {STATS.map((s) => (
               <div key={s.label} className="px-6 py-5">
-                <div className="font-display font-black text-white text-3xl leading-none">
-                  {s.value}
-                </div>
-                <div className="text-zinc-500 text-xs uppercase tracking-widest mt-1 font-display font-bold">
-                  {s.label}
-                </div>
+                <div className="font-display font-black text-white text-3xl leading-none">{s.value}</div>
+                <div className="text-zinc-500 text-xs uppercase tracking-widest mt-1 font-display font-bold">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </ScrollExpandMedia>
 
       {/* ─── ABOUT ─── */}
       <section id="about" className="py-20 bg-background">
