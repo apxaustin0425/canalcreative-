@@ -30,6 +30,7 @@ const NAV_LINKS = [
   { label: "Gallery", href: "#gallery" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
+  { label: "Relief", href: "#relief" },
 ];
 
 const BANQUET_PHOTOS = [
@@ -941,6 +942,118 @@ community of people who take their work seriously. Every new tenant is carefully
           </div>
         </div>
       )}
+
+      {/* ─── VENEZUELA EARTHQUAKE RELIEF ─── */}
+      <section id="relief" className="relative overflow-hidden bg-[oklch(0.09_0.005_60)] border-t-2 border-orange-600">
+        {/* Animated urgency stripe */}
+        <div className="bg-orange-600 py-2 overflow-hidden">
+          <div className="flex gap-12 animate-[marquee_18s_linear_infinite] whitespace-nowrap">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <span key={i} className="text-white font-display font-black uppercase text-sm tracking-widest flex items-center gap-3">
+                <span className="inline-block w-2 h-2 bg-white rounded-full" />
+                Venezuela Earthquake Relief · June 24, 2026 · 7.1 &amp; 7.5 Magnitude · Caracas
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="container py-16 md:py-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left — copy */}
+            <div>
+              <div className="inline-flex items-center gap-2 bg-orange-600/20 border border-orange-600/40 rounded-full px-4 py-1.5 mb-6">
+                <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+                <span className="text-orange-400 font-display font-bold uppercase text-xs tracking-widest">Active Relief · June 2026</span>
+              </div>
+
+              <h2
+                className="font-display font-black uppercase text-white leading-none mb-4"
+                style={{ fontSize: "clamp(2.2rem, 5vw, 3.8rem)" }}
+              >
+                Venezuela<br />
+                <span className="text-orange-500">Needs Us</span><br />
+                Right Now
+              </h2>
+
+              <p className="text-zinc-300 text-base leading-relaxed mb-6">
+                On June 24th, back-to-back earthquakes — 7.1 then 7.5 magnitude — struck near Caracas, Venezuela. Buildings collapsed. Families lost everything. Canal Creative is proud to stand with the community and support immediate relief.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {[
+                  { stat: "$10M", label: "Committed in aid" },
+                  { stat: "97%", label: "Goes directly to relief" },
+                  { stat: "15+", label: "Years of earthquake response" },
+                  { stat: "14", label: "Major disasters worldwide" },
+                ].map(({ stat, label }) => (
+                  <div key={stat} className="bg-white/5 border border-white/10 rounded-lg p-4">
+                    <div className="font-display font-black text-orange-500 text-2xl">{stat}</div>
+                    <div className="text-zinc-400 text-xs uppercase tracking-wide mt-0.5">{label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-zinc-500 text-xs">
+                Donations are processed securely by Global Empowerment Mission (GEM) · EIN: 45-3782061 · 501(c)(3) tax-deductible
+              </p>
+            </div>
+
+            {/* Right — donation card */}
+            <div className="bg-[oklch(0.13_0.006_60)] border border-white/10 rounded-2xl p-8 shadow-2xl">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white text-lg">🌍</span>
+                </div>
+                <div>
+                  <div className="text-white font-display font-black text-sm uppercase tracking-wide">Global Empowerment Mission</div>
+                  <div className="text-zinc-500 text-xs">gem.org · First-in disaster response</div>
+                </div>
+              </div>
+
+              <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+                GEM is deploying immediately — food, water, hygiene kits, and medical supplies to families across Caracas. Every dollar is tracked from arrival to final distribution.
+              </p>
+
+              <div className="space-y-3 mb-6">
+                {[
+                  { amount: "$25", impact: "Provides a hygiene kit for one family" },
+                  { amount: "$50", impact: "Supplies clean water for a week" },
+                  { amount: "$100", impact: "Delivers emergency food for a family" },
+                  { amount: "$250", impact: "Funds a full relief kit + shelter materials" },
+                ].map(({ amount, impact }) => (
+                  <a
+                    key={amount}
+                    href={`https://give.gem.org/campaign/735778/donate?c_src=VZEarthquake&c_src2=CanalCreative&amount=${amount.replace('$','')}&designation=1905343&utm_source=Canal+Creative&utm_campaign=VZ+Earthquake&utm_medium=Website`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between w-full bg-white/5 hover:bg-orange-600/20 border border-white/10 hover:border-orange-600/50 rounded-lg px-4 py-3 transition-all duration-200 group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="font-display font-black text-orange-500 text-lg">{amount}</span>
+                      <span className="text-zinc-400 text-xs">{impact}</span>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                  </a>
+                ))}
+              </div>
+
+              <a
+                href="https://give.gem.org/campaign/735778/donate?c_src=VZEarthquake&c_src2=CanalCreative&designation=1905343&utm_source=Canal+Creative&utm_campaign=VZ+Earthquake&utm_medium=Website"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full bg-orange-600 hover:bg-orange-500 text-white font-display font-black uppercase tracking-wider py-4 rounded-xl transition-all duration-200 text-sm active:scale-[0.98]"
+              >
+                Donate to Venezuela Relief
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
+              <p className="text-center text-zinc-600 text-xs mt-4">
+                Opens GEM's secure donation portal · No account needed
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <footer className="bg-[oklch(0.10_0.005_60)] border-t border-white/10 py-8">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-4">
